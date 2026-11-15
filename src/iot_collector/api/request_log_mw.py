@@ -16,6 +16,14 @@ async def request_logging_middleware(request: Request, call_next):
         return await call_next(request)
 
     start_time = time.perf_counter()
+    device_id = None
+
+    if request.method == "POST" and request.url.path == "/ingestion":
+        try:
+            body = await request.json()
+            device_id = body.get("device_id")
+        except (ValueError, AttributeError):
+            pass
 
     try:
         response = await call_next(request)
@@ -32,12 +40,22 @@ async def request_logging_middleware(request: Request, call_next):
 
     duration = (time.perf_counter() - start_time) * 1000
 
-    logger.info(
-        "%s %s - %d (%.2f ms)",
-        request.method,
-        request.url.path,
-        response.status_code,
-        duration,
-    )
+    if device_id:
+        logger.info(
+            "%s %s device_id=%s - %d (%.2f ms)",
+            request.method,
+            request.url.path,
+            device_id,
+            response.status_code,
+            duration,
+        )
+    else:
+        logger.info(
+            "%s %s - %d (%.2f ms)",
+            request.method,
+            request.url.path,
+            response.status_code,
+            duration,
+        )
 
     return response
