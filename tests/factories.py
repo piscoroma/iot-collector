@@ -4,6 +4,7 @@ from iot_collector.schemas.sensor_reading import SensorReading
 def create_reading(
     device_id: str = "camera",
     sequence: int = 1,
+    rssi: int  = -32,
     uptime: int = 60,
     temperature: float = 21.5,
     humidity: float = 55.2,
@@ -11,6 +12,7 @@ def create_reading(
     return SensorReading(
         device_id=device_id,
         sequence=sequence,
+        rssi=rssi,
         uptime=uptime,
         temperature=temperature,
         humidity=humidity,

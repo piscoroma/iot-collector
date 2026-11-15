@@ -37,6 +37,13 @@ class Metrics:
             registry=self.registry,
         )
 
+        self.packet_rssi = Gauge(
+            "room_packet_rssi",
+            "Last received packet rssi",
+            ["room"],
+            registry=self.registry,
+        )
+
         self.sensor_uptime = Gauge(
             "room_sensor_uptime",
             "Uptime of the room sensor",
@@ -56,5 +63,7 @@ class Metrics:
         self.last_seen.labels(room=room).set(state.last_seen.timestamp())
 
         self.packet_sequence.labels(room=room).set(state.reading.sequence)
+
+        self.packet_rssi.labels(room=room).set(state.reading.rssi)
 
         self.sensor_uptime.labels(room=room).set(state.reading.uptime)

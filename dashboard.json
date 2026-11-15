@@ -5,8 +5,8 @@
     "name": "adrtvjn",
     "namespace": "default",
     "uid": "4b087396-3f98-4a32-8956-6d279a1357ac",
-    "resourceVersion": "1794701586742986",
-    "generation": 7,
+    "resourceVersion": "1794705782801015",
+    "generation": 10,
     "creationTimestamp": "2026-11-08T17:26:44Z",
     "labels": {
       "grafana.app/deprecatedInternalID": "2789937022480384"
@@ -15,7 +15,7 @@
       "grafana.app/createdBy": "user:efwk5isbqt43kb",
       "grafana.app/saved-from-ui": "Grafana v13.2.0 (f681b1359f)",
       "grafana.app/updatedBy": "user:efwk5isbqt43kb",
-      "grafana.app/updatedTimestamp": "2026-11-15T00:13:06Z"
+      "grafana.app/updatedTimestamp": "2026-11-15T01:23:02Z"
     }
   },
   "spec": {
@@ -377,6 +377,30 @@
                     "refId": "F",
                     "hidden": false
                   }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
+                      "datasource": {
+                        "name": "PBFA97CFB590B2093"
+                      },
+                      "spec": {
+                        "editorMode": "code",
+                        "exemplar": false,
+                        "expr": "room_packet_rssi",
+                        "format": "table",
+                        "instant": true,
+                        "legendFormat": "__auto",
+                        "range": false
+                      }
+                    },
+                    "refId": "G",
+                    "hidden": false
+                  }
                 }
               ],
               "transformations": [
@@ -402,22 +426,26 @@
                         "Time 4": true,
                         "Time 5": true,
                         "Time 6": true,
+                        "Time 7": true,
                         "__name__ 1": true,
                         "__name__ 2": true,
                         "__name__ 3": true,
                         "__name__ 4": true,
+                        "__name__ 5": true,
                         "instance 1": true,
                         "instance 2": true,
                         "instance 3": true,
                         "instance 4": true,
                         "instance 5": true,
                         "instance 6": true,
+                        "instance 7": true,
                         "job 1": true,
                         "job 2": true,
                         "job 3": true,
                         "job 4": true,
                         "job 5": true,
-                        "job 6": true
+                        "job 6": true,
+                        "job 7": true
                       },
                       "includeByName": {},
                       "indexByName": {
@@ -425,20 +453,35 @@
                         "Time 2": 6,
                         "Time 3": 11,
                         "Time 4": 15,
+                        "Time 5": 19,
+                        "Time 6": 24,
+                        "Time 7": 30,
                         "Value #A": 5,
                         "Value #B": 10,
                         "Value #C": 14,
                         "Value #D": 18,
+                        "Value #E": 23,
+                        "Value #F": 29,
+                        "Value #G": 28,
                         "__name__ 1": 2,
                         "__name__ 2": 7,
+                        "__name__ 3": 20,
+                        "__name__ 4": 25,
+                        "__name__ 5": 31,
                         "instance 1": 3,
                         "instance 2": 8,
                         "instance 3": 12,
                         "instance 4": 16,
+                        "instance 5": 21,
+                        "instance 6": 26,
+                        "instance 7": 32,
                         "job 1": 4,
                         "job 2": 9,
                         "job 3": 13,
                         "job 4": 17,
+                        "job 5": 22,
+                        "job 6": 27,
+                        "job 7": 33,
                         "room": 0
                       },
                       "renameByName": {
@@ -448,6 +491,7 @@
                         "Value #D": "Last Update",
                         "Value #E": "Last Packet Sequence",
                         "Value #F": "Uptime",
+                        "Value #G": "Last Packet RSSI",
                         "room": "Room"
                       }
                     }
@@ -652,6 +696,36 @@
                         "value": 0
                       }
                     ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "scope": "series",
+                      "options": "Last Packet RSSI"
+                    },
+                    "properties": [
+                      {
+                        "id": "custom.width",
+                        "value": 135
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "scope": "series",
+                      "options": "Last Packet RSSI"
+                    },
+                    "properties": [
+                      {
+                        "id": "unit",
+                        "value": "dB"
+                      },
+                      {
+                        "id": "custom.align",
+                        "value": "center"
+                      }
+                    ]
                   }
                 ]
               }
@@ -771,9 +845,9 @@
                         "editorMode": "code",
                         "exemplar": false,
                         "expr": "room_sensor_uptime{room=\"$room\"}",
-                        "instant": true,
+                        "instant": false,
                         "legendFormat": "__auto",
-                        "range": false
+                        "range": true
                       }
                     },
                     "refId": "A",
@@ -804,6 +878,9 @@
                   "values": false
                 },
                 "showPercentChange": false,
+                "text": {
+                  "valueSize": 35
+                },
                 "textMode": "auto",
                 "wideLayout": true
               },
@@ -822,6 +899,322 @@
                   },
                   "color": {
                     "mode": "thresholds"
+                  }
+                },
+                "overrides": []
+              }
+            }
+          }
+        }
+      },
+      "panel-14": {
+        "kind": "Panel",
+        "spec": {
+          "id": 14,
+          "title": "Last Packet RSSI",
+          "description": "",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
+                      "datasource": {
+                        "name": "PBFA97CFB590B2093"
+                      },
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "room_packet_rssi{room=\"$room\"}",
+                        "legendFormat": "__auto",
+                        "range": true
+                      }
+                    },
+                    "refId": "A",
+                    "hidden": false
+                  }
+                }
+              ],
+              "transformations": [],
+              "queryOptions": {}
+            }
+          },
+          "vizConfig": {
+            "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.2.0",
+            "spec": {
+              "options": {
+                "colorMode": "value",
+                "graphMode": "none",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showPercentChange": false,
+                "text": {
+                  "valueSize": 35
+                },
+                "textMode": "auto",
+                "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "dB",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 80,
+                        "color": "red"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "thresholds"
+                  }
+                },
+                "overrides": []
+              }
+            }
+          }
+        }
+      },
+      "panel-15": {
+        "kind": "Panel",
+        "spec": {
+          "id": 15,
+          "title": "RSSI History",
+          "description": "",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
+                      "datasource": {
+                        "name": "PBFA97CFB590B2093"
+                      },
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "room_packet_rssi{room=\"$room\"}",
+                        "legendFormat": "RSSI",
+                        "range": true
+                      }
+                    },
+                    "refId": "A",
+                    "hidden": false
+                  }
+                }
+              ],
+              "transformations": [],
+              "queryOptions": {}
+            }
+          },
+          "vizConfig": {
+            "kind": "VizConfig",
+            "group": "timeseries",
+            "version": "13.2.0",
+            "spec": {
+              "options": {
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "single",
+                  "sort": "none"
+                }
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 80,
+                        "color": "red"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  }
+                },
+                "overrides": []
+              }
+            }
+          }
+        }
+      },
+      "panel-16": {
+        "kind": "Panel",
+        "spec": {
+          "id": 16,
+          "title": "Packet sequence",
+          "description": "",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
+                      "datasource": {
+                        "name": "PBFA97CFB590B2093"
+                      },
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "room_packet_sequence{room=\"$room\"}",
+                        "legendFormat": "sequence",
+                        "range": true
+                      }
+                    },
+                    "refId": "A",
+                    "hidden": false
+                  }
+                }
+              ],
+              "transformations": [],
+              "queryOptions": {}
+            }
+          },
+          "vizConfig": {
+            "kind": "VizConfig",
+            "group": "timeseries",
+            "version": "13.2.0",
+            "spec": {
+              "options": {
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "single",
+                  "sort": "none"
+                }
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 80,
+                        "color": "red"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
                   }
                 },
                 "overrides": []
@@ -1314,10 +1707,6 @@
                       {
                         "value": 0,
                         "color": "green"
-                      },
-                      {
-                        "value": 80,
-                        "color": "red"
                       }
                     ]
                   },
@@ -1767,7 +2156,7 @@
                                 "spec": {
                                   "x": 0,
                                   "y": 0,
-                                  "width": 6,
+                                  "width": 5,
                                   "height": 3,
                                   "element": {
                                     "kind": "ElementReference",
@@ -1778,7 +2167,7 @@
                               {
                                 "kind": "GridLayoutItem",
                                 "spec": {
-                                  "x": 6,
+                                  "x": 5,
                                   "y": 0,
                                   "width": 5,
                                   "height": 3,
@@ -1791,7 +2180,7 @@
                               {
                                 "kind": "GridLayoutItem",
                                 "spec": {
-                                  "x": 11,
+                                  "x": 10,
                                   "y": 0,
                                   "width": 4,
                                   "height": 3,
@@ -1804,9 +2193,9 @@
                               {
                                 "kind": "GridLayoutItem",
                                 "spec": {
-                                  "x": 15,
+                                  "x": 14,
                                   "y": 0,
-                                  "width": 4,
+                                  "width": 3,
                                   "height": 3,
                                   "element": {
                                     "kind": "ElementReference",
@@ -1817,9 +2206,22 @@
                               {
                                 "kind": "GridLayoutItem",
                                 "spec": {
-                                  "x": 19,
+                                  "x": 17,
                                   "y": 0,
-                                  "width": 5,
+                                  "width": 3,
+                                  "height": 3,
+                                  "element": {
+                                    "kind": "ElementReference",
+                                    "name": "panel-14"
+                                  }
+                                }
+                              },
+                              {
+                                "kind": "GridLayoutItem",
+                                "spec": {
+                                  "x": 20,
+                                  "y": 0,
+                                  "width": 4,
                                   "height": 3,
                                   "element": {
                                     "kind": "ElementReference",
@@ -1850,6 +2252,32 @@
                                   "element": {
                                     "kind": "ElementReference",
                                     "name": "panel-4"
+                                  }
+                                }
+                              },
+                              {
+                                "kind": "GridLayoutItem",
+                                "spec": {
+                                  "x": 0,
+                                  "y": 11,
+                                  "width": 12,
+                                  "height": 8,
+                                  "element": {
+                                    "kind": "ElementReference",
+                                    "name": "panel-15"
+                                  }
+                                }
+                              },
+                              {
+                                "kind": "GridLayoutItem",
+                                "spec": {
+                                  "x": 12,
+                                  "y": 11,
+                                  "width": 12,
+                                  "height": 8,
+                                  "element": {
+                                    "kind": "ElementReference",
+                                    "name": "panel-16"
                                   }
                                 }
                               }

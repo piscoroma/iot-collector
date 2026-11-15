@@ -14,6 +14,7 @@ def test_get_sensors(client, sensor_manager):
             device_id="camera",
             sequence=1,
             uptime=60,
+            rssi=-34,
             temperature=21.5,
             humidity=55.2,
         )
@@ -24,6 +25,7 @@ def test_get_sensors(client, sensor_manager):
             device_id="bagno",
             sequence=2,
             uptime=120,
+            rssi=-38,
             temperature=22.1,
             humidity=61.4,
         )
@@ -41,6 +43,7 @@ def test_get_sensors(client, sensor_manager):
 
     assert camera["sequence"] == 1
     assert camera["uptime"] == 120
+    assert camera["rssi"] == -38
     assert camera["temperature"] == 21.5
     assert camera["humidity"] == 55.2
     assert camera["is_stale"] is False
@@ -53,6 +56,7 @@ def test_get_sensor(client, sensor_manager):
             device_id="camera",
             sequence=1,
             uptime=60,
+            rssi=-38,
             temperature=21.5,
             humidity=55.2,
         )
@@ -67,6 +71,7 @@ def test_get_sensor(client, sensor_manager):
     assert data["device_id"] == "camera"
     assert data["sequence"] == 1
     assert data["uptime"] == 60
+    assert data["rssi"] == -38
     assert data["temperature"] == 21.5
     assert data["humidity"] == 55.2
     assert data["is_stale"] is False
