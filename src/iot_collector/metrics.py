@@ -37,6 +37,13 @@ class Metrics:
             registry=self.registry,
         )
 
+        self.sensor_uptime = Gauge(
+            "room_sensor_uptime",
+            "Uptime of the room sensor",
+            ["room"],
+            registry=self.registry,
+        )
+
     def update(self, state: SensorState) -> None:
         """Update Prometheus metrics with the latest sensor state."""
 
@@ -49,3 +56,5 @@ class Metrics:
         self.last_seen.labels(room=room).set(state.last_seen.timestamp())
 
         self.packet_sequence.labels(room=room).set(state.reading.sequence)
+
+        self.sensor_uptime.labels(room=room).set(state.reading.uptime)

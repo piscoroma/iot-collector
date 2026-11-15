@@ -5,8 +5,8 @@
     "name": "adrtvjn",
     "namespace": "default",
     "uid": "4b087396-3f98-4a32-8956-6d279a1357ac",
-    "resourceVersion": "1794161563260997",
-    "generation": 3,
+    "resourceVersion": "1794701586742986",
+    "generation": 7,
     "creationTimestamp": "2026-11-08T17:26:44Z",
     "labels": {
       "grafana.app/deprecatedInternalID": "2789937022480384"
@@ -15,7 +15,7 @@
       "grafana.app/createdBy": "user:efwk5isbqt43kb",
       "grafana.app/saved-from-ui": "Grafana v13.2.0 (f681b1359f)",
       "grafana.app/updatedBy": "user:efwk5isbqt43kb",
-      "grafana.app/updatedTimestamp": "2026-11-08T18:12:43Z"
+      "grafana.app/updatedTimestamp": "2026-11-15T00:13:06Z"
     }
   },
   "spec": {
@@ -353,6 +353,30 @@
                     "refId": "E",
                     "hidden": false
                   }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
+                      "datasource": {
+                        "name": "PBFA97CFB590B2093"
+                      },
+                      "spec": {
+                        "editorMode": "code",
+                        "exemplar": false,
+                        "expr": "room_sensor_uptime",
+                        "format": "table",
+                        "instant": true,
+                        "legendFormat": "__auto",
+                        "range": false
+                      }
+                    },
+                    "refId": "F",
+                    "hidden": false
+                  }
                 }
               ],
               "transformations": [
@@ -377,19 +401,23 @@
                         "Time 3": true,
                         "Time 4": true,
                         "Time 5": true,
+                        "Time 6": true,
                         "__name__ 1": true,
                         "__name__ 2": true,
                         "__name__ 3": true,
+                        "__name__ 4": true,
                         "instance 1": true,
                         "instance 2": true,
                         "instance 3": true,
                         "instance 4": true,
                         "instance 5": true,
+                        "instance 6": true,
                         "job 1": true,
                         "job 2": true,
                         "job 3": true,
                         "job 4": true,
-                        "job 5": true
+                        "job 5": true,
+                        "job 6": true
                       },
                       "includeByName": {},
                       "indexByName": {
@@ -419,6 +447,7 @@
                         "Value #C": "Status",
                         "Value #D": "Last Update",
                         "Value #E": "Last Packet Sequence",
+                        "Value #F": "Uptime",
                         "room": "Room"
                       }
                     }
@@ -570,6 +599,10 @@
                       {
                         "id": "custom.width",
                         "value": 120
+                      },
+                      {
+                        "id": "decimals",
+                        "value": 0
                       }
                     ]
                   },
@@ -587,6 +620,36 @@
                       {
                         "id": "custom.align",
                         "value": "center"
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "scope": "series",
+                      "options": "Uptime"
+                    },
+                    "properties": [
+                      {
+                        "id": "custom.width",
+                        "value": 91
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "scope": "series",
+                      "options": "Uptime"
+                    },
+                    "properties": [
+                      {
+                        "id": "unit",
+                        "value": "s"
+                      },
+                      {
+                        "id": "decimals",
+                        "value": 0
                       }
                     ]
                   }
@@ -670,6 +733,90 @@
                       {
                         "value": 80,
                         "color": "red"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "thresholds"
+                  }
+                },
+                "overrides": []
+              }
+            }
+          }
+        }
+      },
+      "panel-13": {
+        "kind": "Panel",
+        "spec": {
+          "id": 13,
+          "title": "Uptime",
+          "description": "",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
+                      "datasource": {
+                        "name": "PBFA97CFB590B2093"
+                      },
+                      "spec": {
+                        "editorMode": "code",
+                        "exemplar": false,
+                        "expr": "room_sensor_uptime{room=\"$room\"}",
+                        "instant": true,
+                        "legendFormat": "__auto",
+                        "range": false
+                      }
+                    },
+                    "refId": "A",
+                    "hidden": false
+                  }
+                }
+              ],
+              "transformations": [],
+              "queryOptions": {}
+            }
+          },
+          "vizConfig": {
+            "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.2.0",
+            "spec": {
+              "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "s",
+                  "decimals": 0,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
                       }
                     ]
                   },
@@ -1332,9 +1479,11 @@
                       },
                       "spec": {
                         "editorMode": "code",
+                        "exemplar": false,
                         "expr": "count(\n  (time() - room_last_seen_timestamp_seconds) > 180\n)",
+                        "instant": true,
                         "legendFormat": "__auto",
-                        "range": true
+                        "range": false
                       }
                     },
                     "refId": "A",
@@ -1373,6 +1522,18 @@
               },
               "fieldConfig": {
                 "defaults": {
+                  "mappings": [
+                    {
+                      "type": "special",
+                      "options": {
+                        "match": "null",
+                        "result": {
+                          "text": "0",
+                          "index": 0
+                        }
+                      }
+                    }
+                  ],
                   "thresholds": {
                     "mode": "absolute",
                     "steps": [
@@ -1632,7 +1793,7 @@
                                 "spec": {
                                   "x": 11,
                                   "y": 0,
-                                  "width": 6,
+                                  "width": 4,
                                   "height": 3,
                                   "element": {
                                     "kind": "ElementReference",
@@ -1643,13 +1804,26 @@
                               {
                                 "kind": "GridLayoutItem",
                                 "spec": {
-                                  "x": 17,
+                                  "x": 15,
                                   "y": 0,
-                                  "width": 7,
+                                  "width": 4,
                                   "height": 3,
                                   "element": {
                                     "kind": "ElementReference",
                                     "name": "panel-6"
+                                  }
+                                }
+                              },
+                              {
+                                "kind": "GridLayoutItem",
+                                "spec": {
+                                  "x": 19,
+                                  "y": 0,
+                                  "width": 5,
+                                  "height": 3,
+                                  "element": {
+                                    "kind": "ElementReference",
+                                    "name": "panel-13"
                                   }
                                 }
                               },

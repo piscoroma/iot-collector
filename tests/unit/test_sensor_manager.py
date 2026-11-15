@@ -12,6 +12,7 @@ def test_update_sensor():
     state = sensor_manager.update(create_reading())
 
     assert state.reading.device_id == "camera"
+    assert state.reading.uptime == 60
     assert state.reading.temperature == 21.5
     assert state.reading.humidity == 55.2
     assert state.last_seen.tzinfo == UTC

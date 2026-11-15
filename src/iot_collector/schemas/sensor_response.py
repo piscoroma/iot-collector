@@ -6,6 +6,7 @@ from pydantic import BaseModel
 class SensorResponse(BaseModel):
     device_id: str
     sequence: int
+    uptime: int
     temperature: float
     humidity: float
     last_seen: datetime
