@@ -7,6 +7,7 @@ logger = logging.getLogger("iot_collector.http")
 
 EXCLUDED_PATHS = {
     "/metrics",
+    "/health",
 }
 
 
