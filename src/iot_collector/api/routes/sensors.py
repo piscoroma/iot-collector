@@ -22,6 +22,7 @@ async def get_sensors(
         SensorResponse(
             device_id=device_id,
             sequence=state.reading.sequence,
+            rssi=state.reading.rssi,
             uptime=state.reading.uptime,
             temperature=state.reading.temperature,
             humidity=state.reading.humidity,
@@ -51,6 +52,7 @@ async def get_sensor(
     return SensorResponse(
         device_id=device_id,
         sequence=state.reading.sequence,
+        rssi=state.reading.rssi,
         uptime=state.reading.uptime,
         temperature=state.reading.temperature,
         humidity=state.reading.humidity,

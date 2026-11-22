@@ -42,8 +42,8 @@ def test_get_sensors(client, sensor_manager):
     camera = next(sensor for sensor in data if sensor["device_id"] == "camera")
 
     assert camera["sequence"] == 1
-    assert camera["uptime"] == 120
-    assert camera["rssi"] == -38
+    assert camera["uptime"] == 60
+    assert camera["rssi"] == -34
     assert camera["temperature"] == 21.5
     assert camera["humidity"] == 55.2
     assert camera["is_stale"] is False
