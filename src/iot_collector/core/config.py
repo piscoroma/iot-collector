@@ -16,6 +16,9 @@ class Settings(BaseSettings):
 
     sensor_stale_timeout: int = 180
 
+    prometheus_url: str = "http://localhost:9090"
+    prometheus_timeout: float = 5.0
+
 
 @lru_cache
 def get_settings() -> Settings:

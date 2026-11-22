@@ -8,6 +8,7 @@ from iot_collector.api.router import api_router
 from iot_collector.core.config import get_settings
 from iot_collector.core.logging import setup_logging
 from iot_collector.metrics import Metrics
+from iot_collector.prometheus_api import PrometheusClient
 from iot_collector.sensor_manager import SensorManager
 
 
@@ -20,12 +21,18 @@ async def lifespan(app: FastAPI):
         metrics=metrics,
         stale_timeout=settings.sensor_stale_timeout,
     )
+    prometheus = PrometheusClient(
+        base_url=settings.prometheus_url,
+        timeout=settings.prometheus_timeout,
+    )
     app.state.metrics = metrics
     app.state.sensor_manager = sensor_manager
+    app.state.prometheus = prometheus
 
-    yield
-
-    # clean resources
+    try:
+        yield
+    finally:
+        await prometheus.aclose()
 
 
 app = FastAPI(

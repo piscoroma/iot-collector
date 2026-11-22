@@ -36,6 +36,8 @@ APP_HOST=0.0.0.0
 APP_PORT=8080
 LOG_LEVEL=INFO
 SENSOR_STALE_TIMEOUT=180
+PROMETHEUS_URL=http://localhost:9090
+PROMETHEUS_TIMEOUT=5.0
 ```
 
 ## Run
@@ -58,7 +60,14 @@ Available endpoints:
 
 - API documentation: `http://localhost:9106/docs`
 - Sensor readings: `http://localhost:9106/sensors`
+- Sensor history: `http://localhost:9106/history?device_id=camera&range=6h&points=60`
 - Prometheus metrics: `http://localhost:9106/metrics`
+
+The history endpoint queries Prometheus (`PROMETHEUS_URL`) with `query_range`.
+Supported ranges are `1h`, `6h`, `24h`, and `7d`; `points` defaults to 60 and
+is capped at 500. It returns both temperature and humidity series in one
+response. Unknown devices return empty series; an unreachable Prometheus
+returns HTTP 503.
 
 ## Tests
 
